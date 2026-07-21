@@ -6,7 +6,7 @@ int main()
     int population;
 
     printf("Municipal Financial Management System\n\n");
-    printf("Welcome to Widhoek Municipality\n\n");
+    printf("Welcome to Windhoek Municipality\n\n");
 
     printf("Enter Municipality Name: ");
     scanf("%49s", municipality);
