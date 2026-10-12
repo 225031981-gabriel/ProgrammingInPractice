@@ -1,1 +1,146 @@
+#include <stdio.h>
 
+int main()
+{
+    char name1[50], name2[50], name3[50], name4[50];
+    float price1, price2, price3, price4;
+    int registered1, registered2, registered3, registered4;
+    int docs1, docs2, docs3, docs4;
+    int qualified1, qualified2, qualified3, qualified4;
+    float budget;
+    float lowest = 0;
+    int preferred = 0;  
+
+    printf("Enter available budget: ");
+    scanf("%f", &budget);
+
+    printf("\n--- Supplier 1 ---\n");
+    printf("Enter supplier name: ");
+    scanf("%49s", name1);
+    printf("Enter tender price: ");
+    scanf("%f", &price1);
+    printf("Is supplier registered? (1=Yes, 0=No): ");
+    scanf("%d", &registered1);
+    printf("Are all documents complete? (1=Yes, 0=No): ");
+    scanf("%d", &docs1);
+
+    printf("\n--- Supplier 2 ---\n");
+    printf("Enter supplier name: ");
+    scanf("%49s", name2);
+    printf("Enter tender price: ");
+    scanf("%f", &price2);
+    printf("Is supplier registered? (1=Yes, 0=No): ");
+    scanf("%d", &registered2);
+    printf("Are all documents complete? (1=Yes, 0=No): ");
+    scanf("%d", &docs2);
+
+    printf("\n--- Supplier 3 ---\n");
+    printf("Enter supplier name: ");
+    scanf("%49s", name3);
+    printf("Enter tender price: ");
+    scanf("%f", &price3);
+    printf("Is supplier registered? (1=Yes, 0=No): ");
+    scanf("%d", &registered3);
+    printf("Are all documents complete? (1=Yes, 0=No): ");
+    scanf("%d", &docs3);
+
+    printf("\n--- Supplier 4 ---\n");
+    printf("Enter supplier name: ");
+    scanf("%49s", name4);
+    printf("Enter tender price: ");
+    scanf("%f", &price4);
+    printf("Is supplier registered? (1=Yes, 0=No): ");
+    scanf("%d", &registered4);
+    printf("Are all documents complete? (1=Yes, 0=No): ");
+    scanf("%d", &docs4);
+
+    qualified1 = (registered1 == 1 && docs1 == 1 && price1 <= budget);
+    qualified2 = (registered2 == 1 && docs2 == 1 && price2 <= budget);
+    qualified3 = (registered3 == 1 && docs3 == 1 && price3 <= budget);
+    qualified4 = (registered4 == 1 && docs4 == 1 && price4 <= budget);
+
+    if (qualified1 == 1)
+    {
+        preferred = 1;
+        lowest = price1;
+    }
+
+    if (qualified2 == 1 && (preferred == 0 || price2 < lowest))
+    {
+        preferred = 2;
+        lowest = price2;
+    }
+
+    if (qualified3 == 1 && (preferred == 0 || price3 < lowest))
+    {
+        preferred = 3;
+        lowest = price3;
+    }
+
+    if (qualified4 == 1 && (preferred == 0 || price4 < lowest))
+    {
+        preferred = 4;
+        lowest = price4;
+    }
+
+  
+    printf("\n===== RESULTS =====\n");
+
+    printf("%s (%.2f): ", name1, price1);
+    if (preferred == 1)
+    {
+        printf("Preferred Supplier\n");
+    }
+    else if (qualified1 == 1)
+    {
+        printf("Qualified\n");
+    }
+    else
+    {
+        printf("Disqualified\n");
+    }
+
+    printf("%s (%.2f): ", name2, price2);
+    if (preferred == 2)
+    {
+        printf("Preferred Supplier\n");
+    }
+    else if (qualified2 == 1)
+    {
+        printf("Qualified\n");
+    }
+    else
+    {
+        printf("Disqualified\n");
+    }
+
+    printf("%s (%.2f): ", name3, price3);
+    if (preferred == 3)
+    {
+        printf("Preferred Supplier\n");
+    }
+    else if (qualified3 == 1)
+    {
+        printf("Qualified\n");
+    }
+    else
+    {
+        printf("Disqualified\n");
+    }
+
+    printf("%s (%.2f): ", name4, price4);
+    if (preferred == 4)
+    {
+        printf("Preferred Supplier\n");
+    }
+    else if (qualified4 == 1)
+    {
+        printf("Qualified\n");
+    }
+    else
+    {
+        printf("Disqualified\n");
+    }
+
+    return 0;
+}
