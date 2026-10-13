@@ -1,0 +1,125 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    float salaries[50];
+    float salaryTotal = 0;
+    float salaryAverage;
+    float salaryHighest;
+    float salaryLowest;
+    float salarySearch;
+    int salaryFound = 0;
+
+    float budgets[10];
+    float budgetTotal = 0;
+    float budgetAverage;
+    float temp;
+
+    char registrations[20][20];
+    char regSearch[20];
+    int regFound = 0;
+
+    printf("===== PART A: EMPLOYEE SALARIES =====\n");
+
+    for (int i = 0; i < 50; i++) {
+        printf("Enter salary %d: ", i + 1);
+        scanf("%f", &salaries[i]);
+    }
+
+    printf("\n--- All Salaries ---\n");
+    for (int i = 0; i < 50; i++) {
+        printf("%d: %.2f\n", i + 1, salaries[i]);
+    }
+
+    salaryHighest = salaries[0];
+    salaryLowest = salaries[0];
+    for (int i = 0; i < 50; i++) {
+        salaryTotal = salaryTotal + salaries[i];
+        if (salaries[i] > salaryHighest) {
+            salaryHighest = salaries[i];
+        }
+        if (salaries[i] < salaryLowest) {
+            salaryLowest = salaries[i];
+        }
+    }
+    salaryAverage = salaryTotal / 50;
+
+    printf("\nAverage salary: %.2f\n", salaryAverage);
+    printf("Highest salary: %.2f\n", salaryHighest);
+    printf("Lowest salary: %.2f\n", salaryLowest);
+
+    printf("\nEnter a salary to search for: ");
+    scanf("%f", &salarySearch);
+    for (int i = 0; i < 50; i++) {
+        if (salaries[i] == salarySearch) {
+            salaryFound = 1;
+            printf("Salary found at position %d\n", i + 1);
+            break;
+        }
+    }
+    if (!salaryFound) {
+        printf("Salary not found.\n");
+    }
+
+    printf("\n===== PART B: DEPARTMENT BUDGETS =====\n");
+
+    for (int i = 0; i < 10; i++) {
+        printf("Enter budget for department %d: ", i + 1);
+        scanf("%f", &budgets[i]);
+    }
+
+    printf("\n--- Budgets (as entered) ---\n");
+    for (int i = 0; i < 10; i++) {
+        printf("Department %d: %.2f\n", i + 1, budgets[i]);
+    }
+
+    for (int i = 0; i < 10; i++) {
+        budgetTotal = budgetTotal + budgets[i];
+    }
+    budgetAverage = budgetTotal / 10;
+
+    printf("\nTotal budget: %.2f\n", budgetTotal);
+    printf("Average budget: %.2f\n", budgetAverage);
+
+    for (int i = 0; i < 10 - 1; i++) {
+        for (int j = 0; j < 10 - i - 1; j++) {
+            if (budgets[j] > budgets[j + 1]) {
+                temp = budgets[j];
+                budgets[j] = budgets[j + 1];
+                budgets[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("\n--- Budgets (Lowest to Highest) ---\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%.2f\n", budgets[i]);
+    }
+
+    printf("\n===== PART C: VEHICLE REGISTRATIONS =====\n");
+
+    for (int i = 0; i < 20; i++) {
+        printf("Enter vehicle registration %d: ", i + 1);
+        scanf("%19s", registrations[i]);
+    }
+
+    printf("\n--- Vehicle Registrations ---\n");
+    for (int i = 0; i < 20; i++) {
+        printf("%d: %s\n", i + 1, registrations[i]);
+    }
+
+    printf("\nEnter a registration number to search for: ");
+    scanf("%19s", regSearch);
+    for (int i = 0; i < 20; i++) {
+        if (strcmp(registrations[i], regSearch) == 0) {
+            regFound = 1;
+            printf("Registration found at position %d\n", i + 1);
+            break;
+        }
+    }
+    if (!regFound) {
+        printf("Registration not found.\n");
+    }
+
+    return 0;
+}
